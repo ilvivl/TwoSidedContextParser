@@ -1,0 +1,45 @@
+grammar(Program);
+
+Program = MainFunction;
+MainFunction = MFHeader MFBody;
+MFHeader = MFHSign MFHNoArg;
+MFHeader = MFHSign MFHArgcArgv;
+MFHSign = MFType MFName;
+MFType = "Int ";
+MFName = "Main LeftParen ";
+MFHNoArg = "RightParen ";
+
+MFBody = LBrace StatementsRBrace;
+LBrace = "LeftCurly ";
+StatementsRBrace = Statements RBrace;
+RBrace = "RightCurly ";
+Statements = Statement Statements;
+Statements = ProperlyReturningStatement;
+
+ProperlyReturningStatement = Return IntExprSimicolon & < PRSIntCheck;
+Return = "Return ";
+IntExprSimicolon = IntExpr Semicolon;
+Semicolon = "Semicolon ";
+IntExpr = IntConst Space;
+IntConst = Digits;
+
+PRSIntCheck = FIntType AnythingExceptFH;
+FIntType = "Int ";
+
+AnythingExceptFH = "Main LeftParen ";
+AnythingExceptFH = "RightParen ";
+
+Space = " ";
+
+Digits = Digit Digits;
+Digits = Digit;
+Digit = "0";
+Digit = "1";
+Digit = "2";
+Digit = "3";
+Digit = "4";
+Digit = "5";
+Digit = "6";
+Digit = "7";
+Digit = "8";
+Digit = "9";
